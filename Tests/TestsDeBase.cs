@@ -8,7 +8,7 @@ namespace Tests
     public class TestsDeBase
     {
         [TestMethod]
-        public void T1_Additionner()
+        public void T1Additionner()
         {
             Assert.AreEqual(17, Fonctions.Additionner(7, 10));
             Assert.AreEqual(90, Fonctions.Additionner(100, -10));
@@ -24,7 +24,7 @@ namespace Tests
         [DataRow(-110, -100, -10)]
         [DataRow(100, 100, 0)]
         [DataRow(0, 0, 0)]
-        public void T2_Additionner_DG(int somme, int n1, int n2)
+        public void T2AdditionnerDG(int somme, int n1, int n2)
         {
             Assert.AreEqual(somme, Fonctions.Additionner(n1, n2));
         }
@@ -44,7 +44,7 @@ namespace Tests
         [DataRow(7, "")]
         [DataRow(77, "")]
         [DataRow(10201, "")]
-        public void T3_FizzBuzz_DG(int nombre, string résultat)
+        public void T3FizzBuzzDG(int nombre, string résultat)
         {
             Assert.AreEqual(résultat, Fonctions.FizzBuzz(nombre));
         }
