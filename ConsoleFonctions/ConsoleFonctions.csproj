@@ -3,5 +3,9 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net5.0</TargetFramework>
 		<Nullable>enable</Nullable>
+		<AssemblyName>ConsoleFonctionsDG</AssemblyName>
 	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\RévisionLib\RévisionLib.csproj" />
+	</ItemGroup>
 </Project>
