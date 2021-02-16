@@ -13,7 +13,18 @@ namespace ConsoleFonctions
             Console.WriteLine("Vive Git!");
             AfficherAdditionAléatoire();
             AfficherFizzBuzzAléatoire();
+            AfficherSérie(début: 1, fin: 10);
             _ = Console.ReadKey();
+        }
+
+        private static void AfficherSérie(int début, int fin)
+        {
+            Console.WriteLine($"Série de {début} à {fin}: ");
+            for (int i = début; i <= fin; i++)
+            {
+                Console.Write(i + ", ");
+            }
+            Console.WriteLine();
         }
 
         private static void AfficherAdditionAléatoire()
