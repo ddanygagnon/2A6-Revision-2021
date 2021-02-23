@@ -20,21 +20,34 @@ namespace RévisionLib
             return !estPair && !String.IsNullOrEmpty(s);
         }
         public static bool PremierChiffre(this string message,
-            out int indice)
+            out int indice, int indiceDépart = 0)
         {
-            char premierChiffre = message.ToCharArray().ToList().Find(Char.IsDigit);
-            indice = message.IndexOf(premierChiffre);
-            return indice != -1;
-        }
-        public static bool PremierChiffre(this string message,
-            out int indice, int indiceDépart)
-        {
-            throw new NotImplementedException();
+            var list = message
+                .ToCharArray()
+                .ToList();
+            bool estIndiceValide = indiceDépart < message.Length && indiceDépart >= 0;
+            if (estIndiceValide)
+            {
+                list.RemoveRange(0, indiceDépart);
+            }
+            var premierChiffre = list.Find(Char.IsDigit);
+            indice = estIndiceValide ? message.IndexOf(premierChiffre) : -1;
+            return estIndiceValide && indice != -1;
         }
         public static bool PremierNonChiffre(this string message,
             out int indice, int indiceDépart = 0)
         {
-            throw new NotImplementedException();
+            var list = message
+                .ToCharArray()
+                .ToList();
+            bool estIndiceValide = indiceDépart < message.Length && indiceDépart >= 0;
+            if (estIndiceValide)
+            {
+                list.RemoveRange(0, indiceDépart);
+            }
+            var premierChiffre = list.Find(Char.IsLetter);
+            indice = estIndiceValide ? message.IndexOf(premierChiffre) : -1;
+            return estIndiceValide && indice != -1;
         }
         public static bool LocaliserNombre(this string message,
             out int indiceDébut, out int indiceFin, int indiceDépart = 0)

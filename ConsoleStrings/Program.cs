@@ -51,6 +51,36 @@ namespace ConsoleStrings
             Console.WriteLine(
                 $"PremierChiffre( {param} ) = {param.PremierChiffre(out indice),5} {indice,4}"
             );
+            Console.WriteLine();
+            param = "AGENT 007 DG";
+            int depart = -1;
+            Console.WriteLine(
+                $"PremierChiffre( {param}, {depart} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
+            );
+            depart = 0;
+            Console.WriteLine(
+                $"PremierChiffre( {param}, {depart,2} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
+            );
+            depart = 4;
+            Console.WriteLine(
+                $"PremierChiffre( {param}, {depart,2} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
+            );
+            depart = 7;
+            Console.WriteLine(
+                $"PremierChiffre( {param}, {depart,2} ) = {param.PremierChiffre(out indice, depart),5} {depart,4}"
+            );
+            depart = 10;
+            Console.WriteLine(
+                $"PremierChiffre( {param}, {depart,2} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
+            );
+            depart = 15;
+            Console.WriteLine(
+                $"PremierChiffre( {param}, {depart,2} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
+            );
+            param = "1";
+            Console.WriteLine(
+                $"LocaliserNombre( {param} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
+            );
             Console.WriteLine("Appuyer sur une touche pour terminer...");
             Console.ReadKey();
         }
