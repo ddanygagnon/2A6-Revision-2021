@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RévisionLib
 {
@@ -11,7 +8,15 @@ namespace RévisionLib
         public static bool Découper(string s,
             out string début, out char centre, out string fin)
         {
-            throw new NotImplementedException();
+            bool estPair = s.Length % 2 == 0;
+            début = String.IsNullOrEmpty(s) ? "" :
+                s.Substring(0, s.Length / 2);
+            fin = estPair ?
+                s.Substring(s.Length / 2, s.Length / 2) :
+                s.Substring(s.Length / 2 + 1, s.Length / 2);
+            centre = estPair ? '\0' :
+                    Convert.ToChar(s.Substring(s.Length / 2, 1));
+            return !estPair && !String.IsNullOrEmpty(s);
         }
         public static bool PremierChiffre(this string message,
             out int indice)
