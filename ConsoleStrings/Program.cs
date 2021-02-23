@@ -43,6 +43,14 @@ namespace ConsoleStrings
                 $"Découper({nomPoint + '!',20}) = {Strings.Découper(nomPoint + '!', out début, out centre, out fin),5} {début,10}  {(centre == '\0' ? ' ' : centre)}  {fin}"
             );
             Console.WriteLine();
+            string param = "AGENT 007 DG";
+            Console.WriteLine(
+                $"PremierChiffre( {param} ) = {param.PremierChiffre(out int indice),5} {indice,4}"
+            );
+            param = "AGENT XXX DG";
+            Console.WriteLine(
+                $"PremierChiffre( {param} ) = {param.PremierChiffre(out indice),5} {indice,4}"
+            );
             Console.WriteLine("Appuyer sur une touche pour terminer...");
             Console.ReadKey();
         }

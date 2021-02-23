@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RévisionLib
 {
@@ -21,7 +22,9 @@ namespace RévisionLib
         public static bool PremierChiffre(this string message,
             out int indice)
         {
-            throw new NotImplementedException();
+            char premierChiffre = message.ToCharArray().ToList().Find(Char.IsDigit);
+            indice = message.IndexOf(premierChiffre);
+            return indice != -1;
         }
         public static bool PremierChiffre(this string message,
             out int indice, int indiceDépart)
