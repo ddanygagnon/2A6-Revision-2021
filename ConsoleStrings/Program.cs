@@ -20,9 +20,18 @@ namespace ConsoleStrings
             DémoDécouper();
             DémoPremierChiffre();
             DémoLocaliserNombre();
+            DémoExtraireNombres();
 
+            WriteLine("Appuyer sur une touche pour terminer...");
+
+            _ = ReadKey();
+        }
+
+        private static void DémoExtraireNombres()
+        {
             WriteLine();
-            var tester = new[] {
+            var tester = new[]
+            {
                 "",
                 "1",
                 "Biden",
@@ -40,9 +49,27 @@ namespace ConsoleStrings
                 );
             }
 
-            WriteLine("Appuyer sur une touche pour terminer...");
+            string test = "DG: 10, 20, 30, 40, 50, 60";
+            var nbs = new List<int>();
+            Write($"\nExtraireNombres({test}) = \n{test.ExtraireNombres(nbs)} => ");
+            int idx = 0;
+            foreach (int nb in nbs)
+            {
+                idx++;
+                Write(nb);
+                Write(idx < nbs.Count ? ", " : "\n");
+            }
 
-            _ = ReadKey();
+            test = "DG: 10, 20, 300000000000, 40";
+            nbs = new List<int>();
+            Write($"\nExtraireNombres({test}) = \n{test.ExtraireNombres(nbs)} => ");
+            idx = 0;
+            foreach (int nb in nbs)
+            {
+                idx++;
+                Write(nb);
+                Write(idx < nbs.Count ? ", " : "\n");
+            }
         }
 
         private static void DémoPremierChiffre()

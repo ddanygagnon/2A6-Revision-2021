@@ -60,24 +60,63 @@ namespace RévisionLib
             return premierChiffre;
         }
 
-        public static bool SommeChiffres(this int nombre) => throw new NotImplementedException();
+        public static bool SommeChiffres(this int nombre)
+        {
+            if (nombre <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(nombre));
+            }
 
-        public static bool EncoderLettre(this char c) => throw new NotImplementedException();
+            throw new NotImplementedException();
+        }
+
+        public static bool EncoderLettre(this char c)
+        {
+            if (c <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(c));
+            }
+
+            throw new NotImplementedException();
+        }
 
         public static bool EncoderLettre(this char c,
-            int décalage) =>
+            int décalage)
+        {
+            if (c <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(c));
+            }
+
+            if (décalage <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(décalage));
+            }
+
             throw new NotImplementedException();
+        }
 
         public static bool EncoderMessage(this string message,
-            int décalage = 1) =>
+            int décalage = 1)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            if (décalage <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(décalage));
+            }
+
             throw new NotImplementedException();
+        }
 
         public static bool ExtraireNombre(this string message,
             out int nombre, ref int indiceDépart)
         {
             var localiser = LocaliserNombre(message, out int indiceDebut, out int indiceFin, indiceDépart);
             bool estIndiceValide = indiceDépart >= 0 && indiceDépart <= message.Length;
-            int resultat;
             if (estIndiceValide)
             {
                 if (!localiser)
@@ -90,7 +129,7 @@ namespace RévisionLib
                     nombre = 0;
                     for (int i = indiceDépart; i < message.Length; i++)
                     {
-                        if (int.TryParse(message[indiceDebut..indiceFin], out resultat))
+                        if (int.TryParse(message[indiceDebut..indiceFin], out int resultat))
                         {
                             nombre = resultat;
                             indiceDépart = indiceFin;
@@ -114,18 +153,17 @@ namespace RévisionLib
             List<int> nombres)
         {
             int indice = 0;
-
-            while (ExtraireNombre(message, out int nb, ref indice))
+            while (message.ExtraireNombre(out int nb, ref indice))
             {
-                if (nb == 0)
-                {
-                    return false;
-                }
-                nombres.Add(nb);
                 indice++;
+                nombres.Add(nb);
             }
 
-            return indice != 0 && nombres.Count != 0;
+            Console.WriteLine(indice);
+
+            return (indice == message.Length) ||
+                   (indice == 0 && message.Length == 0) ||
+                   (indice >= message.Length && nombres.Count > 0);
         }
     }
 }
