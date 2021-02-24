@@ -113,7 +113,19 @@ namespace RévisionLib
         public static bool ExtraireNombres(this string message,
             List<int> nombres)
         {
-            return false;
+            int indice = 0;
+
+            while (ExtraireNombre(message, out int nb, ref indice))
+            {
+                if (nb == 0)
+                {
+                    return false;
+                }
+                nombres.Add(nb);
+                indice++;
+            }
+
+            return indice != 0 && nombres.Count != 0;
         }
     }
 }
