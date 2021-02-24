@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Text;
 
 using RévisionLib;
+
+using static System.Console;
 
 
 namespace ConsoleStrings
@@ -12,77 +12,121 @@ namespace ConsoleStrings
     {
         private const string nom = "Dany Gagnon";
         private const string initiales = "DG";
+
         private static void Main()
         {
-            Console.Title = $"{nameof(ConsoleStrings)} - {nom}";
+            Title = $"{nameof(ConsoleStrings)} - {nom}";
+
+            DémoDécouper();
+            DémoPremierChiffre();
+            DémoLocaliserNombre();
+
+            WriteLine("Appuyer sur une touche pour terminer...");
+
+            _ = ReadKey();
+        }
+
+        private static void DémoPremierChiffre()
+        {
+            WriteLine();
+            const string param = "AGENT 007 DG";
+            WriteLine(
+                $"PremierChiffre( {param} ) = {param.PremierChiffre(out int indice),5} {indice,4}"
+            );
+            const string paramXxx = "AGENT XXX DG";
+            WriteLine(
+                $"PremierChiffre( {paramXxx} ) = {paramXxx.PremierChiffre(out indice),5} {indice,4}"
+            );
+            WriteLine();
+            var aTest = new[] { -1, 0, 4, 7, 10, 15 };
+            foreach (int test in aTest)
+            {
+                WriteLine(
+                    $"PremierChiffre( {param}, {test,2} ) = {param.PremierChiffre(out indice, test),5} {indice,4}"
+                );
+            }
+        }
+
+        private static void DémoDécouper()
+        {
             string alphabet = "";
-            string début, fin = "";
-            char centre = '\0';
+            string début;
+            char centre;
+            string fin;
             for (int i = 'A'; i <= 'E'; i++)
             {
                 alphabet += (char)i;
-                Console.WriteLine(
+                WriteLine(
                     $"Découper({alphabet,20}) = {Strings.Découper(alphabet, out début, out centre, out fin),5} {début,10}  {(centre == '\0' ? ' ' : centre)}  {fin}"
                 );
             }
+
             int aleatoire = new Random().Next(6, 20);
 
             for (int i = 0; i < 2; i++)
             {
                 string fill = "".PadRight(aleatoire + i, '+');
-                Console.WriteLine(
+                WriteLine(
                     $"Découper({fill,20}) = {Strings.Découper(fill, out début, out centre, out fin),5} {début,10}  {(centre == '\0' ? ' ' : centre)}  {fin}"
                 );
             }
 
             string nomPoint = nom.Replace(' ', '.');
-            Console.WriteLine(
+            WriteLine(
                 $"Découper({nomPoint,20}) = {Strings.Découper(nomPoint, out début, out centre, out fin),5} {début,10}  {(centre == '\0' ? ' ' : centre)}  {fin}"
             );
-            Console.WriteLine(
+            WriteLine(
                 $"Découper({nomPoint + '!',20}) = {Strings.Découper(nomPoint + '!', out début, out centre, out fin),5} {début,10}  {(centre == '\0' ? ' ' : centre)}  {fin}"
             );
-            Console.WriteLine();
-            string param = "AGENT 007 DG";
-            Console.WriteLine(
-                $"PremierChiffre( {param} ) = {param.PremierChiffre(out int indice),5} {indice,4}"
-            );
-            param = "AGENT XXX DG";
-            Console.WriteLine(
-                $"PremierChiffre( {param} ) = {param.PremierChiffre(out indice),5} {indice,4}"
-            );
-            Console.WriteLine();
-            param = "AGENT 007 DG";
-            int depart = -1;
-            Console.WriteLine(
-                $"PremierChiffre( {param}, {depart} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
-            );
-            depart = 0;
-            Console.WriteLine(
-                $"PremierChiffre( {param}, {depart,2} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
-            );
-            depart = 4;
-            Console.WriteLine(
-                $"PremierChiffre( {param}, {depart,2} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
-            );
-            depart = 7;
-            Console.WriteLine(
-                $"PremierChiffre( {param}, {depart,2} ) = {param.PremierChiffre(out indice, depart),5} {depart,4}"
-            );
-            depart = 10;
-            Console.WriteLine(
-                $"PremierChiffre( {param}, {depart,2} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
-            );
-            depart = 15;
-            Console.WriteLine(
-                $"PremierChiffre( {param}, {depart,2} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
-            );
-            param = "1";
-            Console.WriteLine(
-                $"LocaliserNombre( {param} ) = {param.PremierChiffre(out indice, depart),5} {indice,4}"
-            );
-            Console.WriteLine("Appuyer sur une touche pour terminer...");
-            Console.ReadKey();
+        }
+
+        private static void DémoLocaliserNombre()
+        {
+            WriteLine();
+            var tester = new[] {
+                "",
+                "1",
+                "Biden",
+                "123 Go!",
+                "Wayne 99",
+                "Agent 007 DG"
+            };
+            foreach (string nbTest in tester)
+            {
+                bool resultat = nbTest.LocaliserNombre(out int debut, out int fin);
+                WriteLine(
+                    $"LocaliserNombre( {nbTest,13} ) = {resultat,5} {debut,3} {fin,3}{(resultat ? $"{"",2}=> {nbTest[debut..fin]}" : "")}"
+                );
+            }
+            WriteLine();
+            string msg = "Agents 007, 008 et 00DG au rapport!";
+            WriteLine($"Message: {msg}\n");
+            var àTester = new[] { -1, 4, 8, 10, 13, 15, 25, 40 };
+            var listeNbs = new List<string>();
+            foreach (int nbTest in àTester)
+            {
+                bool resultat = msg.LocaliserNombre(out int debut, out int fin, nbTest);
+                if (resultat)
+                {
+                    listeNbs.Add(msg[debut..fin]);
+                }
+
+                WriteLine(
+                    $"LocaliserNombre( {nbTest,2} ) = {resultat,5} {debut,3} {fin,3}{(resultat ? $"{"",2}=> {msg[debut..fin]}" : "")}"
+                );
+
+
+            }
+
+            WriteLine();
+            Write("Les nombres sont: ");
+            int indDepart = 0;
+            while (msg.LocaliserNombre(out int deb, out int f, indDepart))
+            {
+                Write($"{msg[deb..f]} ");
+                indDepart = f;
+            }
+            WriteLine();
         }
     }
 }
