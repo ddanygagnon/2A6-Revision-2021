@@ -73,11 +73,47 @@ namespace RévisionLib
             throw new NotImplementedException();
 
         public static bool ExtraireNombre(this string message,
-            out int nombre, ref int indiceDépart) =>
-            throw new NotImplementedException();
+            out int nombre, ref int indiceDépart)
+        {
+            var localiser = LocaliserNombre(message, out int indiceDebut, out int indiceFin, indiceDépart);
+            bool estIndiceValide = indiceDépart >= 0 && indiceDépart <= message.Length;
+            int resultat;
+            if (estIndiceValide)
+            {
+                if (!localiser)
+                {
+                    indiceDépart = message.Length;
+                    nombre = 0;
+                }
+                else
+                {
+                    nombre = 0;
+                    for (int i = indiceDépart; i < message.Length; i++)
+                    {
+                        if (int.TryParse(message[indiceDebut..indiceFin], out resultat))
+                        {
+                            nombre = resultat;
+                            indiceDépart = indiceFin;
+                        }
+                        else
+                        {
+                            indiceDépart = indiceDebut;
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                nombre = 0;
+            }
+            return localiser;
+        }
 
         public static bool ExtraireNombres(this string message,
-            List<int> nombres) =>
-            throw new NotImplementedException();
+            List<int> nombres)
+        {
+            return false;
+        }
     }
 }

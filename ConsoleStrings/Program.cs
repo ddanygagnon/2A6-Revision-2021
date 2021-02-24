@@ -21,6 +21,25 @@ namespace ConsoleStrings
             DémoPremierChiffre();
             DémoLocaliserNombre();
 
+            WriteLine();
+            var tester = new[] {
+                "",
+                "1",
+                "Biden",
+                "123 Go!",
+                "Wayne 99",
+                "Agent 007 DG",
+                "Big 10000000000000"
+            };
+            foreach (string nbTest in tester)
+            {
+                int indice = 0;
+                bool resultat = nbTest.ExtraireNombre(out int nb, ref indice);
+                WriteLine(
+                    $"ExtraireNombre( {nbTest,20} ) = {resultat,5} {indice,3}{($"{"",2}=> {nb}")}"
+                );
+            }
+
             WriteLine("Appuyer sur une touche pour terminer...");
 
             _ = ReadKey();
